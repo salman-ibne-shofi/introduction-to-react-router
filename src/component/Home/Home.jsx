@@ -1,15 +1,23 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigation } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 
 const Home = () => {
-    return (
-        <div>
-            <Header></Header>
-            <Outlet></Outlet>
-            <Footer></Footer>
-        </div>
-    );
+	const navigation = useNavigation();
+    const location = useLocation();
+    console.log(location);
+	return (
+		<div>
+			<Header></Header>
+			{navigation.state === "loading" ? (
+				<p>Loading...</p>
+			) : (
+				<Outlet></Outlet>
+			)}
+			<Outlet></Outlet>
+			<Footer></Footer>
+		</div>
+	);
 };
 
 export default Home;
